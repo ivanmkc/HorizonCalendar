@@ -141,11 +141,14 @@ public struct HorizontalMonthsLayoutOptions: Hashable {
     scrollingBehavior: ScrollingBehavior = .paginatedScrolling(
       .init(
         restingPosition: .atLeadingEdgeOfEachMonth,
-        restingAffinity: .atPositionsAdjacentToPrevious)))
+        restingAffinity: .atPositionsAdjacentToPrevious)),
+    monthWidthOverride: CGFloat? = nil
+  )
   {
     assert(maximumFullyVisibleMonths >= 1, "`maximumFullyVisibleMonths` must be greater than 1.")
     self.maximumFullyVisibleMonths = maximumFullyVisibleMonths
     self.scrollingBehavior = scrollingBehavior
+    self.monthWidthOverride = monthWidthOverride
   }
 
   // MARK: Public
@@ -155,10 +158,15 @@ public struct HorizontalMonthsLayoutOptions: Hashable {
 
   /// The scrolling behavior of the horizontally-scrolling calendar: either paginated-scrolling or free-scrolling.
   public let scrollingBehavior: ScrollingBehavior
+    
+  /// If set, overrides the inferred month width.
+  public let monthWidthOverride: CGFloat?
 
   // MARK: Internal
 
   func monthWidth(calendarWidth: CGFloat, interMonthSpacing: CGFloat) -> CGFloat {
+    if let monthWidthOverride = monthWidthOverride { return monthWidthOverride }
+      
     let visibleInterMonthSpacing = CGFloat(maximumFullyVisibleMonths) * interMonthSpacing
     return (calendarWidth - visibleInterMonthSpacing) / CGFloat(maximumFullyVisibleMonths)
   }

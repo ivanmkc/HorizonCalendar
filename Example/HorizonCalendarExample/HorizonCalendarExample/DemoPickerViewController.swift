@@ -152,7 +152,10 @@ extension DemoPickerViewController: UITableViewDelegate {
             scrollingBehavior: .paginatedScrolling(
               .init(
                 restingPosition: .atLeadingEdgeOfEachMonth,
-                restingAffinity: .atPositionsClosestToTargetOffset)))))
+                restingAffinity: .atPositionsClosestToTargetOffset)),
+            monthWidthOverride: 220
+          ))
+    )
 
     navigationController?.pushViewController(demoViewController, animated: true)
   }

@@ -167,6 +167,7 @@ struct SwiftUIScreenDemo: View {
       }
 
       .frame(maxWidth: 375, maxHeight: .infinity)
+      .background(Color.blue)
   }
 
   // MARK: Private
